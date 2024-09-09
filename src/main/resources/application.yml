@@ -1,3 +1,6 @@
 spring:
   application:
     name: stock-be
+springdoc:
+  swagger-ui:
+    path: /api/swagger-ui.html
