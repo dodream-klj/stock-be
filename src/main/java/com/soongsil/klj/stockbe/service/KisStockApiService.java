@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.nio.channels.MembershipKey;
-
 @Service
 @RequiredArgsConstructor
 public class KisStockApiService {
@@ -22,6 +20,7 @@ public class KisStockApiService {
     @Value("${kis-api.secret}")
     String kisApiSecret;
 
+    private String accessToken;
 
     public Mono<String> getStock() {
         return webClient.get()
@@ -31,12 +30,13 @@ public class KisStockApiService {
                         .queryParam("PDNO", "Q500001")
                         .build()
                 )
+                .header("authorization", accessToken)
                 .retrieve()
                 .bodyToMono(String.class);
     }
 
     public Mono<AccessTokenResponse> getAccessToken() {
-        return webClient.post()
+        AccessTokenResponse accessTokenResponse = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path("/oauth2/tokenP")
                         .queryParam("PRDT_TYPE_CD", "300")
@@ -49,6 +49,10 @@ public class KisStockApiService {
                         .grant_type("client_credentials")
                         .build()), AccessTokenRequest.class)
                 .retrieve()
-                .bodyToMono(AccessTokenResponse.class);
+                .bodyToMono(AccessTokenResponse.class).block();
+
+        accessToken = "Bearer " + accessTokenResponse.getAccess_token();
+
+        return Mono.just(accessTokenResponse);
     }
 }
