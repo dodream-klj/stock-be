@@ -4,3 +4,8 @@ spring:
 springdoc:
   swagger-ui:
     path: /api/swagger-ui.html
+
+kis-api:
+  url: https://openapi.koreainvestment.com:9443
+  key: PSXJ0jZt94CnnVoOj4ZpeCouKuec9Lu5gJ6n
+  secret: nk5e0GsXrf9dH0oO4wnJK761vtvBL13m222Zn7L9WhvH0ta09PTylYxCYxBLePwfFSfCjWfVPrG7GHXOmq69XOPtqts78k+rQYAjY27AIXlBMa8O70x0QN4DgcuT052gvcT05qC46QIb0sk/ZJqpdLWzxG8h0u1y/+Mc7A8KDwmle5b0cwg=
