@@ -23,7 +23,6 @@ public class WebClientConfig {
             .baseUrl(kisApiUrl)
             .defaultHeaders(httpHeaders -> {
                 httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8");
-                httpHeaders.add("authorization", "");
                 httpHeaders.add("appkey", kisApiKey);
                 httpHeaders.add("appsecret", kisApiSecret);
                 httpHeaders.add("tr_id", "CTPF1002R");
